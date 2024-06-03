@@ -13,8 +13,8 @@ const BistroBoss = () => {
         <div className="hero-overlay"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-4xl h-60 rounded-md p-10 bg-white text-black">
-            <h1 className="mb-5 text-5xl font-[poppins]">Bistro Boss</h1>
-            <p className="mb-5 px-20">
+            <h1 className="md:mb-5 text-2xl md:text-5xl font-[poppins]">Bistro Boss</h1>
+            <p className="mb-5 md:px-20">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
