@@ -4,7 +4,7 @@ const Featured = () => {
   return (
     <div>
       <div
-        className="hero md:h-[900px] lg:h-[648px] text-white"
+        className="hero md:h-[900px] lg:h-[648px] text-white bg-fixed"
         style={{
           backgroundImage: `url(${image})`,
         }}

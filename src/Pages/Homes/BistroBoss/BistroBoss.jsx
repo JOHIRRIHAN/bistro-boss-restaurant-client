@@ -2,9 +2,9 @@ import img1 from '../../../assets/home/chef-service.jpg'
 
 const BistroBoss = () => {
   return (
-    <div className="py-20 max-w-screen-lg mx-auto">
+    <div className="py-20 max-w-screen-lg mx-auto ">
       <div
-        className="hero min-h-screen "
+        className="hero min-h-screen bg-fixed"
         style={{
           backgroundImage:
             `url(${img1})`,
