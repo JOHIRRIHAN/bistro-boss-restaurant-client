@@ -9,6 +9,7 @@ import { Navigation } from "swiper/modules";
 import { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { BiSolidQuoteSingleLeft } from "react-icons/bi";
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
@@ -29,12 +30,17 @@ const Testimonials = () => {
 
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {reviews.map((review) => (
-          <SwiperSlide key={review._id}>
+          <SwiperSlide key={review._id}> 
             <div className="mx-20">
-              <Rating className="mx-auto my-5"
+              <div className="flex items-center justify-center text-6xl">
+                <BiSolidQuoteSingleLeft />
+                <BiSolidQuoteSingleLeft />
+              </div>
+              <Rating
+                className="mx-auto my-5"
                 style={{ maxWidth: 180 }}
                 value={review.rating}
-                onChange={setReviews}
+                
               />
               <p>{review.details}</p>
               <h3 className="text-center text-2xl text-yellow-600">
