@@ -3,7 +3,7 @@ import SectionTitlr from "../../../Components/SectionTitle/SectionTitlr";
 import MenuItemCard from "../../Sheared/MenuItemCard/MenuItemCard";
 
 const PopularMenu = () => {
-  const [ menus, setMenus ] = useState([]);
+  const [menus, setMenus] = useState([]);
 
   useEffect(() => {
     fetch("menu.json")
@@ -19,10 +19,15 @@ const PopularMenu = () => {
         heading="FROM OUR MENU"
         subHeading="Check it out"
       ></SectionTitlr>
-      <div className="grid md:grid-cols-2 gap-10 max-w-screen-lg mx-auto pb-20">
+      <div className="grid md:grid-cols-2 gap-10 max-w-screen-lg mx-auto pb-10">
         {menus?.map((item) => (
           <MenuItemCard key={item._id} item={item}></MenuItemCard>
         ))}
+      </div>
+      <div className="flex flex-col items-center">
+        <button className="btn btn-outline border-0 border-b-4 mb-4">
+          View Full Menu
+        </button>
       </div>
     </section>
   );
