@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
 import SectionTitlr from "../../../Components/SectionTitle/SectionTitlr";
 import MenuItemCard from "../../Sheared/MenuItemCard/MenuItemCard";
+import useMenu from "../../../Hooks/useMenu";
 
 const PopularMenu = () => {
-  const [menus, setMenus] = useState([]);
+  const [menus] = useMenu();
+  const popular = menus.filter(item => item.category === "popular");
+  // const [menus, setMenus] = useState([]);
 
-  useEffect(() => {
-    fetch("menu.json")
-      .then((result) => result.json())
-      .then((data) => {
-        const popularItems = data.filter((item) => item.category === "popular");
-        setMenus(popularItems);
-      });
-  }, [setMenus]);
+  // useEffect(() => {
+  //   fetch("menu.json")
+  //     .then((result) => result.json())
+  //     .then((data) => {
+  //       const popularItems = data.filter((item) => item.category === "popular");
+  //       setMenus(popularItems);
+  //     });
+  // }, [setMenus]);
   return (
     <section>
       <SectionTitlr
@@ -20,7 +22,7 @@ const PopularMenu = () => {
         subHeading="Check it out"
       ></SectionTitlr>
       <div className="grid md:grid-cols-2 gap-10 max-w-screen-lg mx-auto pb-10">
-        {menus?.map((item) => (
+        {popular?.map((item) => (
           <MenuItemCard key={item._id} item={item}></MenuItemCard>
         ))}
       </div>
