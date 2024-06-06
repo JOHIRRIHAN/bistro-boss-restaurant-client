@@ -7,6 +7,7 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../Components/Providers/AuthProvider";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const LogIn = () => {
   const captchaRef = useRef(null);
@@ -45,6 +46,9 @@ const LogIn = () => {
   };
   return (
     <div className="p-10">
+      <Helmet>
+        <title>Bistro Boss || SignIn</title>
+      </Helmet>
       <div className="hero min-h-screen shadow-2xl shadow-black ">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">
@@ -104,7 +108,12 @@ const LogIn = () => {
                 />
               </div>
             </form>
-            <p className="text-center pb-5 text-lg">New Here? please <Link className="text-[#D1A054] font-bold" to={'/signin'}>Create Account</Link></p>
+            <p className="text-center pb-5 text-lg">
+              New Here? please{" "}
+              <Link className="text-[#D1A054] font-bold" to={"/signin"}>
+                Create Account
+              </Link>
+            </p>
           </div>
         </div>
       </div>
