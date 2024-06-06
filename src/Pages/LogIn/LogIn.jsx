@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import authImg from '../../assets/others/authentication1.png'
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 
 
 const LogIn = () => {
