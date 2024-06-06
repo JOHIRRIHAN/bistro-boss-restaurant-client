@@ -30,6 +30,11 @@ const NavBars = () => {
           Our Shop
         </Link>
       </li>
+      <li>
+        <Link className="uppercase text-base font-semibold" to={"/login"}>
+          Log In
+        </Link>
+      </li>
     </>
   );
   return (

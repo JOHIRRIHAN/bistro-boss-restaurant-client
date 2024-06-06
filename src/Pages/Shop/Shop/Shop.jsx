@@ -9,10 +9,13 @@ import OrderCard from "../OrderCard/OrderCard";
 import { useParams } from "react-router-dom";
 
 const Shop = () => {
+  // eslint-disable-next-line no-unused-vars
   const {categorys} = ['salad', 'pizza', 'soup', 'dessert', 'drinks']
   const {category} = useParams();
+  // eslint-disable-next-line no-unused-vars
   const initialIndex = category.indexOf(category)
   
+  // eslint-disable-next-line no-unused-vars
   const [tabIndex, setTabIndex] = useState(0);
   const [menus] = useMenu();
 
@@ -21,7 +24,6 @@ const Shop = () => {
   const pizza = menus.filter((item) => item.category === "pizza");
   const soup = menus.filter((item) => item.category === "soup");
   const drinks = menus.filter((item) => item.category === "drinks");
-  const offered = menus.filter((item) => item.category === "offered");
   return (
     <div>
         <Helmet>
