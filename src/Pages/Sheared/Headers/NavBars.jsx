@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
 import avater from "../../../assets/icon/avater.png";
 import avater1 from "../../../assets/others/profile.png";
+import { useContext } from "react";
+import { AuthContext } from "../../../Components/Providers/AuthProvider";
 
 const NavBars = () => {
+  const {user, logOut} = useContext(AuthContext);
+  const handleLogOut= ()=>{
+    logOut()
+    .then(()=>{})
+    .catch(error =>{
+      console.log(error)
+    })
+  }
   const navLink = (
     <>
       <li>
@@ -30,11 +40,17 @@ const NavBars = () => {
           Our Shop
         </Link>
       </li>
-      <li>
+      {
+        user ? <>
+        <button onClick={handleLogOut} className="btn btn-ghost">Log Out</button>
+        </>:<>
+        <li>
         <Link className="uppercase text-base font-semibold" to={"/login"}>
           Log In
         </Link>
       </li>
+        </>
+      }
     </>
   );
   return (
