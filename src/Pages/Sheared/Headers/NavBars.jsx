@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import avater from "../../../assets/icon/avater.png";
-import avater1 from "../../../assets/others/profile.png";
+// import avater from "../../../assets/icon/avater.png";
+// import avater1 from "../../../assets/others/profile.png";
 import { useContext } from "react";
 import { AuthContext } from "../../../Components/Providers/AuthProvider";
 
@@ -47,6 +47,7 @@ const NavBars = () => {
       </li>
       {
         user ? <>
+        <span>{user?.displayName}</span>
         <button onClick={handleLogOut} className="btn btn-ghost">Log Out</button>
         </>:<>
         <li>
@@ -95,7 +96,7 @@ const NavBars = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
-      <div className="avatar">
+      {/* <div className="avatar">
         <div className="w-14 mr-2 rounded-full">
           <img src={avater} />
         </div>
@@ -105,7 +106,7 @@ const NavBars = () => {
         <div className="w-12 rounded-full ">
           <img src={avater1} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

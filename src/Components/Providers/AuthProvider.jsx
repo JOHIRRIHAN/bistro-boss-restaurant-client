@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from '../../../src/Firebase/firebase.config/'
 
@@ -26,6 +27,13 @@ const AuthProvider = ({children}) => {
         return signOut(Auth)
     }
 
+
+    const updateUserProfile = (name, photo)=>{
+        return updateProfile(Auth.currentUser, {
+            displayName: name, photoURL: photo
+        })
+    }
+
     useEffect(()=>{
         const unSubsCribe = onAuthStateChanged(Auth, currentUser=>{
             setUser(currentUser)
@@ -45,7 +53,7 @@ const AuthProvider = ({children}) => {
         createUser,
         logInUser,
         logOut,
-        
+        updateUserProfile,
     }
     return (
         <AuthContext.Provider value={AuthInfo}>

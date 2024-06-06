@@ -2,22 +2,39 @@ import { useContext } from "react";
 import authImg from "../../assets/others/authentication1.png";
 
 import { AuthContext } from "../../Components/Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
+import { data } from "autoprefixer";
 
 const SignIn = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+const navigate = useNavigate();
+
   const handleSignIn = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, email, password);
+    const photo = form.photo.value;
+    console.log(name, email, password, photo);
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        updateUserProfile(data.name, data.photo)
+        .then(()=>{
+            console.log('user profile info update');
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User Created Successfully",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              navigate('/')
+        })
       })
       .catch((error) => {
         console.log(error);
@@ -44,6 +61,18 @@ const SignIn = () => {
                   type="text"
                   placeholder="Name"
                   name="name"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="url"
+                  placeholder="Photo URL"
+                  name="photo"
                   className="input input-bordered"
                   required
                 />
