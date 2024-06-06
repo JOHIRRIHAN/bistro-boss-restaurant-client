@@ -40,6 +40,11 @@ const NavBars = () => {
           Our Shop
         </Link>
       </li>
+      <li>
+        <Link className="uppercase text-base font-semibold" to={"/secret"}>
+          Secret
+        </Link>
+      </li>
       {
         user ? <>
         <button onClick={handleLogOut} className="btn btn-ghost">Log Out</button>

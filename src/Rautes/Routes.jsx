@@ -5,6 +5,8 @@ import Manu from "../Pages/Menu/Menu/Manu";
 import Shop from "../Pages/Shop/Shop/Shop";
 import LogIn from "../Pages/LogIn/LogIn";
 import SignIn from "../Pages/SignIn/SignIn";
+import PrivateRoute from "./PrivateRoute";
+import Secret from "../Pages/Sheared/Secret/Secret";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "/signin",
         element: <SignIn></SignIn>
+      },
+      {
+        path: 'secret',
+        element: <PrivateRoute><Secret></Secret></PrivateRoute>
       }
     ],
   },
