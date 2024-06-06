@@ -9,9 +9,13 @@ import OrderCard from "../OrderCard/OrderCard";
 import { useParams } from "react-router-dom";
 
 const Shop = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const {categorys} = ['salad', 'pizza', 'soup', 'dessert', 'drinks']
   const {category} = useParams();
+  const initialIndex = category.indexOf(category)
+  
+  const [tabIndex, setTabIndex] = useState(0);
   const [menus] = useMenu();
+
   const salad = menus.filter((item) => item.category === "salad");
   const dessert = menus.filter((item) => item.category === "dessert");
   const pizza = menus.filter((item) => item.category === "pizza");
