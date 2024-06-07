@@ -1,18 +1,45 @@
 /* eslint-disable react/prop-types */
 
 import Swal from "sweetalert2";
-import useAuth from "../../Hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+// import useAuth from "../../Hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+// import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const FoodCards = ({ item }) => {
-  const { name, image, price, recipe } = item;
-  const {user} = useAuth;
+  const { name, image, price, recipe, _id } = item;
+  const {user} = useContext(AuthContext);
+  console.log('user', user)
   const navigate = useNavigate();
+  const location = useLocation();
+  const axiosSecure = useAxiosSecure();
 
   const handleAddToCard = food =>{
     if(user && user.email){
-      // todo:
-    }else{
+      console.log(user.email, food);
+      const cartItem = {
+        menuId: _id,
+        name,
+        image,
+        price,
+        email: user.email
+      }
+      axiosSecure.post('/carts', cartItem)
+      .then(res =>{
+        console.log(res.data)
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${name} added by cart✅`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })
+      
+    }
+    else{
       Swal.fire({
         title: "Please LogIn",
         text: "Please Log In then Add To The Cart",
@@ -23,7 +50,7 @@ const FoodCards = ({ item }) => {
         confirmButtonText: "Yes, LogIn!"
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate('/login')
+          navigate('/login', {state: {from: location}})
         }
       });
     }
