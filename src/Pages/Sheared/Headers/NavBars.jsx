@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 // import avater1 from "../../../assets/others/profile.png";
 import { useContext } from "react";
 import { AuthContext } from "../../../Components/Providers/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
 
 const NavBars = () => {
-  const {user, logOut} = useContext(AuthContext);
-  const handleLogOut= ()=>{
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
     logOut()
-    .then(()=>{})
-    .catch(error =>{
-      console.log(error)
-    })
-  }
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const navLink = (
     <>
       <li>
@@ -45,18 +46,34 @@ const NavBars = () => {
           Secret
         </Link>
       </li>
-      {
-        user ? <>
-        <span>{user?.displayName}</span>
-        <button onClick={handleLogOut} className="btn btn-ghost">Log Out</button>
-        </>:<>
-        <li>
-        <Link className="uppercase text-base font-semibold" to={"/login"}>
-          Log In
+      <li>
+        <Link className="uppercase text-base font-semibold" to={"/"}>
+          <div className="indicator">
+            <span className="indicator-item badge badge-secondary">0+</span>
+            <div className="avatar">
+              <button className="w-10 text-white border-none text-3xl rounded-xl">
+                <FaShoppingCart />
+              </button>
+            </div>
+          </div>
         </Link>
       </li>
+      {user ? (
+        <>
+          <button className="btn btn-xs ml-3 mt-3 text-orange-600">{user?.email}</button>
+          <button onClick={handleLogOut} className="btn btn-ghost">
+            Log Out
+          </button>
         </>
-      }
+      ) : (
+        <>
+          <li>
+            <Link className="uppercase text-base font-semibold" to={"/login"}>
+              Log In
+            </Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (
