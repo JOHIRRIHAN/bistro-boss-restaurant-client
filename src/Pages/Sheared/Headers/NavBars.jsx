@@ -49,7 +49,7 @@ const NavBars = () => {
         </Link>
       </li>
       <li>
-        <Link className="uppercase text-base font-semibold" to={"/"}>
+        <Link className="uppercase text-base font-semibold" to={"/dashboard/cart"}>
           <div className="indicator">
             <span className="indicator-item badge badge-secondary">{cart.length}+</span>
             <div className="avatar">
@@ -115,17 +115,7 @@ const NavBars = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
-      {/* <div className="avatar">
-        <div className="w-14 mr-2 rounded-full">
-          <img src={avater} />
-        </div>
-      </div>
-      <div className="avatar">
-        <h3 className="w-20">Sign Out</h3>
-        <div className="w-12 rounded-full ">
-          <img src={avater1} />
-        </div>
-      </div> */}
+      
     </div>
   );
 };
