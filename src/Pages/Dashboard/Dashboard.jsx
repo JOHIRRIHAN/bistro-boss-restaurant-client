@@ -7,9 +7,11 @@ import { MdPayment } from "react-icons/md";
 import { TbBrandBooking } from "react-icons/tb";
 import { VscPreview } from "react-icons/vsc";
 import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../../Hooks/useCart";
 // import SectionTitlr from "../../Components/SectionTitle/SectionTitlr";
 
 const Dashboard = () => {
+    const [cart] = useCart();
   return (
     <div className="flex ">
         <Helmet>
@@ -44,7 +46,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink to={"/dashboard/cart"}>
-              <FaShoppingCart className="text-3xl"/> My Cart
+              <FaShoppingCart className="text-3xl"/> My Cart <sub>(+{cart.length})</sub>
             </NavLink>
           </li>
           <li>
