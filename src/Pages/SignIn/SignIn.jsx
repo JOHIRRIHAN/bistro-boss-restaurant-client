@@ -5,11 +5,12 @@ import { AuthContext } from "../../Components/Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-import { data } from "autoprefixer";
+import useAxiousPublic from "../../Hooks/useAxiousPublic";
 
 const SignIn = () => {
+  const axiosPublic = useAxiousPublic();
   const { createUser, updateUserProfile } = useContext(AuthContext);
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSignIn = (event) => {
     event.preventDefault();
@@ -23,18 +24,24 @@ const navigate = useNavigate();
       .then((result) => {
         const user = result.user;
         console.log(user);
-        updateUserProfile(data.name, data.photo)
-        .then(()=>{
-            console.log('user profile info update');
-            Swal.fire({
+        const userInfo = {
+          name: form.name.value,
+          email: form.email.value
+        }
+        updateUserProfile(name, photo).then(() => {
+          axiosPublic.post("/users",  userInfo).then((res) => {
+            if (res.data.insertedId) {
+              Swal.fire({
                 position: "top-end",
                 icon: "success",
                 title: "User Created Successfully",
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
               });
-              navigate('/')
-        })
+              navigate("/");
+            }
+          });
+        });
       })
       .catch((error) => {
         console.log(error);

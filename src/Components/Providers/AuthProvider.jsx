@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from '../../../src/Firebase/firebase.config/'
 
@@ -11,6 +11,7 @@ const Auth = getAuth(app)
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true);
+    const googleProvider = new GoogleAuthProvider();
 
     const createUser = (email, password)=>{
         setLoading(true)
@@ -20,6 +21,11 @@ const AuthProvider = ({children}) => {
     const logInUser = (email, password)=>{
         setLoading(true)
         return signInWithEmailAndPassword(Auth, email, password)
+    }
+
+    const googleSignIn = ()=>{
+        setLoading(true);
+        return signInWithPopup(Auth, googleProvider)
     }
 
     const logOut = ()=>{
@@ -37,7 +43,7 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
         const unSubsCribe = onAuthStateChanged(Auth, currentUser=>{
             setUser(currentUser)
-            console.log('current user', currentUser);
+            // console.log('current user', currentUser);
             setLoading(false)
         })
         return ()=>{
@@ -54,6 +60,7 @@ const AuthProvider = ({children}) => {
         logInUser,
         logOut,
         updateUserProfile,
+        googleSignIn,
     }
     return (
         <AuthContext.Provider value={AuthInfo}>

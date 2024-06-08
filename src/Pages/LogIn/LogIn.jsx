@@ -9,6 +9,7 @@ import { AuthContext } from "../../Components/Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const LogIn = () => {
   const [disable, setDisable] = useState(true);
@@ -119,6 +120,7 @@ const LogIn = () => {
                 Create Account
               </Link>
             </p>
+            <p className="text-center"><SocialLogin></SocialLogin></p>
           </div>
         </div>
       </div>
