@@ -9,6 +9,11 @@ import PrivateRoute from "./PrivateRoute";
 import Secret from "../Pages/Sheared/Secret/Secret";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Cart from "../Pages/Dashboard/Cart";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
+import AddItems from "../Pages/Dashboard/AddItems/AddItems";
+import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
+import ManageBooking from "../Pages/Dashboard/ManageBooking/ManageBooking";
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +54,29 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: <Cart></Cart>
-      }
+      },
+      // admin 
+      {
+        path: '/dashboard/adminHome',
+        element: <AdminHome></AdminHome>
+      },
+      {
+        path: '/dashboard/addItems',
+        element: <AddItems></AddItems>
+      },
+      {
+        path: '/dashboard/manageItems',
+        element: <ManageItems></ManageItems>
+      },
+      {
+        path: '/dashboard/manageBooking',
+        element: <ManageBooking></ManageBooking>
+      },
+      {
+        path: '/dashboard/allUser',
+        element: <AllUsers></AllUsers>
+      },
+
     ]
   },
 ]);
