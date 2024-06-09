@@ -9,9 +9,10 @@ import { VscPreview } from "react-icons/vsc";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../../Hooks/useCart";
 import { TfiMenuAlt } from "react-icons/tfi";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Dashboard = () => {
-  const isAdmin = true; //TODO:   get isAdmin value from the database
+  const [isAdmin] = useAdmin(); //TODO:   get isAdmin value from the database
   const [cart] = useCart();
   return (
     <div className="flex ">
