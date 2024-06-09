@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 // import useCart from "../../../Hooks/useCart";
 
 const AllUsers = () => {
-    // const [ refetch] = useCart();
+  // const [ refetch] = useCart();
   const axiosSecure = useAxiosSecure();
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
@@ -17,36 +17,44 @@ const AllUsers = () => {
     },
   });
 
-  const handleMakeAdmin = user =>{
-    
-  }
+  const handleMakeAdmin = (user) => {
+    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch()
+        Swal.fire({
+          title: "Good job!",
+          text: `${user.name} added by Admin`,
+          icon: "success",
+        });
+      }
+    });
+  };
 
-
-  const handleDeleteUser = user =>{
+  const handleDeleteUser = (user) => {
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          axiosSecure.delete(`/users/${user._id}`).then((res) => {
-            if (res.data.deletedCount > 0) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success",
-              });
-              refetch()
-            }
-          });
-        }
-      });
-
-  }
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
       <SectionTitlr
@@ -74,15 +82,29 @@ const AllUsers = () => {
                 </tr>
               </thead>
               <tbody>
-                {
-                    users.map((user, index) => <tr key={user._id}>
-                        <th>{index + 1}</th>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td><button onClick={()=> handleMakeAdmin(user)} className="btn text-2xl text-white bg-[#D1A054]"><FaUsers></FaUsers></button></td>
-                        <td><button onClick={()=> handleDeleteUser(user)} className="btn text-2xl text-white bg-red-700"><MdDelete /></button></td>
-                      </tr>)
-                }
+                {users.map((user, index) => (
+                  <tr key={user._id}>
+                    <th>{index + 1}</th>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      { user.role === 'admin' ? 'Admin' : <button
+                        onClick={() => handleMakeAdmin(user)}
+                        className="btn text-2xl text-white bg-[#D1A054]"
+                      >
+                        <FaUsers></FaUsers>
+                      </button>}
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleDeleteUser(user)}
+                        className="btn text-2xl text-white bg-red-700"
+                      >
+                        <MdDelete />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
