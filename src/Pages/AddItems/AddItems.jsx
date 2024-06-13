@@ -1,10 +1,50 @@
 import { useForm } from "react-hook-form";
 import SectionTitlr from "../../Components/SectionTitle/SectionTitlr";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
+import useAxiousPublic from "../../Hooks/useAxiousPublic";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
+const imgHosting = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const imgHostingApi = `https://api.imgbb.com/1/upload?expiration=600&key=${imgHosting}`;
+// console.log(imgHosting)
 const AddItems = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const { register, handleSubmit, reset } = useForm();
+  const axiosPublic = useAxiousPublic();
+  const axiosSecure = useAxiosSecure();
+  const onSubmit = async (data) => {
+    console.log(data);
+
+    const imageFile = {image: data.image[0]}
+     console.log(imageFile)
+    const res = await axiosPublic.post(imgHostingApi, imageFile, {
+        headers: {
+            'content-type' : 'multipart/form-data'  
+        }
+    });
+    if(res.data.success){
+        const menuItem = {
+            name: data.name,
+            category: data.category,
+            price: parseFloat(data.price),
+            recipe: data.recipe,
+            image: res.data.data.display_url
+        }
+        const menuRes = await axiosSecure.post('/menus', menuItem);
+        console.log(menuRes.data);
+        if(menuRes.data.insertedId){
+            reset()
+            Swal.fire({
+                title: "Good job!",
+                text: `${data.name} item is added by Menu✅`,
+                icon: "success"
+              });
+        }
+       
+    }
+    console.log(res.data)
+  };
   return (
     <div>
       <SectionTitlr
@@ -49,15 +89,15 @@ const AddItems = () => {
             </label>
           </div>
 
-            {/* recipe details  */}
+          {/* recipe details  */}
           <label htmlFor="">Recipe Details*</label>
           <textarea
             {...register("recipe")}
             placeholder="Recipe Details"
             className="textarea textarea-bordered textarea-lg w-full h-72"
           ></textarea>
-            
-            {/* file input  */}
+
+          {/* file input  */}
           <input
             {...register("image")}
             type="file"
