@@ -14,8 +14,9 @@ const AllUsers = () => {
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
-    },
-  });
+      },
+      });
+    console.log("users", users);
 
   const handleMakeAdmin = (user) => {
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
@@ -63,7 +64,6 @@ const AllUsers = () => {
       ></SectionTitlr>
       <div className="shadow-2xl shadow-black p-5 max-w-screen-lg mx-auto">
         <div>
-          {" "}
           <h3 className="text-3xl font-semibold mb-5">
             Total Users: {users.length}
           </h3>

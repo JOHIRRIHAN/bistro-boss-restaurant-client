@@ -11,9 +11,11 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import Cart from "../Pages/Dashboard/Cart";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
-import AddItems from "../Pages/Dashboard/AddItems/AddItems";
+// import AddItems from "../Pages/Dashboard/AddItems/AddItems";
 import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 import ManageBooking from "../Pages/Dashboard/ManageBooking/ManageBooking";
+import AdminRouts from "./AdminRouts";
+import AddItems from "../Pages/AddItems/AddItems";
 
 export const router = createBrowserRouter([
   {
@@ -55,14 +57,14 @@ export const router = createBrowserRouter([
         path: 'cart',
         element: <Cart></Cart>
       },
+      {
+        path: 'addItems',
+        element: <AdminRouts><AddItems></AddItems></AdminRouts>
+      },
       // admin 
       {
         path: '/dashboard/adminHome',
-        element: <AdminHome></AdminHome>
-      },
-      {
-        path: '/dashboard/addItems',
-        element: <AddItems></AddItems>
+        element: <AdminRouts><AdminHome></AdminHome></AdminRouts>
       },
       {
         path: '/dashboard/manageItems',
@@ -74,7 +76,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard/allUser',
-        element: <AllUsers></AllUsers>
+        element: <AdminRouts><AllUsers></AllUsers></AdminRouts>
       },
 
     ]
