@@ -68,7 +68,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard/manageItems',
-        element: <ManageItems></ManageItems>
+        element: <AdminRouts><ManageItems></ManageItems></AdminRouts>
       },
       {
         path: '/dashboard/manageBooking',
