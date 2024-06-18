@@ -3,6 +3,7 @@ import SectionTitlr from "../../Components/SectionTitle/SectionTitlr";
 import useCart from "../../Hooks/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -26,7 +27,7 @@ const Cart = () => {
               text: "Your file has been deleted.",
               icon: "success",
             });
-            refetch()
+            refetch();
           }
         });
       }
@@ -45,7 +46,11 @@ const Cart = () => {
             Total Orders: {cart.length}
           </h3>
           <h3 className="text-3xl font-semibold">Total Price: ${totalPrice}</h3>
-          <button className="btn bg-[#D1A054] text-white">Pay</button>
+          { cart.length ? <Link to={"/dashboard/payment"}>
+            <button  className="btn bg-[#D1A054] text-white">Pay</button>
+          </Link>:
+          <button disabled className="btn bg-[#D1A054] text-white">Pay</button>
+          }
         </div>
         <div className="overflow-x-auto">
           <table className="table">
