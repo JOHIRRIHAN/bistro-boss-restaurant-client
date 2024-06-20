@@ -18,6 +18,7 @@ import AdminRouts from "./AdminRouts";
 import AddItems from "../Pages/AddItems/AddItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
         element: <Payment></Payment>
       },
       {
+        path: 'userHome',
+        element: <UserHome></UserHome>
+      },
+      {
         path: 'addItems',
         element: <AdminRouts><AddItems></AddItems></AdminRouts>
       },
@@ -87,7 +92,7 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/updateItem/:id',
         element: <AdminRouts><UpdateItem></UpdateItem></AdminRouts>,
-        loader: ({params}) => fetch(`http://localhost:5000/menus/${params.id}`)
+        loader: ({params}) => fetch(`https://bistro-boss-restaurant-server-lyart.vercel.app/menus/${params.id}`)
       },
 
     ]

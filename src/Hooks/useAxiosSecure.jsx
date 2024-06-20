@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 export const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://bistro-boss-restaurant-server-lyart.vercel.app",
 });
 const useAxiosSecure = () => {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const useAxiosSecure = () => {
       return response;
     },async (error) => {
       const status = error.response.status;
-    //   console.log("status error in the interceptors", status);
+      console.log("status error in the interceptors", status);
       if(status === 401 || status === 403){
         await logOut();
         navigate('/')

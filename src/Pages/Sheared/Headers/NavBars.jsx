@@ -5,9 +5,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Components/Providers/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../Hooks/useCart";
+// import useAdmin from "../../../Hooks/useAdmin";
 
 const NavBars = () => {
   const { user, logOut } = useContext(AuthContext);
+  // const [isAdmin] = useAdmin();
   const [cart] = useCart();
   const handleLogOut = () => {
     logOut()

@@ -29,18 +29,20 @@ const SignIn = () => {
           email: form.email.value
         }
         updateUserProfile(name, photo).then(() => {
-          axiosPublic.post("/users",  userInfo).then((res) => {
-            if (res.data.insertedId) {
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "User Created Successfully",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              navigate("/");
-            }
-          });
+          if(updateUserProfile){
+            axiosPublic.post("/users",  userInfo).then((res) => {
+              if (res.data.insertedId) {
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User Created Successfully",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
+          }
         });
       })
       .catch((error) => {
